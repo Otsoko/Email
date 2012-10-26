@@ -1,0 +1,12 @@
+PROJECT(EMAIL)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+ 
+SET(SRCS
+	main.cpp
+	email.h
+	email.cpp
+)
+
+ADD_EXECUTABLE(Email ${SRCS})
+
+INSTALL(TARGETS Email DESTINATION bin)
