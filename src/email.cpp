@@ -1,4 +1,3 @@
-//Comentario
 #include "email.h"
 #include <iostream>
 #include <netdb.h>         /* gethostbyname  */

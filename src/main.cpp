@@ -1,4 +1,3 @@
-//Comentario
 #include <iostream>
 #include "email.h"
 
@@ -6,12 +5,12 @@ int main() {
 	Email *email = Email::Instance();
 	
 	int ret = email->sendmail(
-        "from@from-host.org",   /* from     */
-        "annirbal@gmail.com",       /* to       */
-        "Subject",              /* subject  */
-        "body",                 /* body     */
-        "localhost",             /* hostname */
-        25                      /* port     */
+        "from@from-host.org",		/* from     */
+        "direccion@servidor.com",	/* to       */
+        "Subject",					/* subject  */
+        "body",						/* body     */
+        "localhost",				/* hostname */
+        25							/* port     */
     );
 
     if (ret != 0)
