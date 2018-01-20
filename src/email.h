@@ -1,6 +1,9 @@
 #ifndef EMAIL_H
 #define EMAIL_H
 
+#include <iostream>
+#include <vector>
+
 class Email {
 
 	static Email* instance;
@@ -8,7 +11,7 @@ class Email {
 public:
 	static Email* Instance();
 	static void Release();
-	int sendmail(const char *from, const char *to, const char *subject, const char *body, const char *hostname, const int port);
+	int sendmail(const char *from, std::vector<std::string> recipients, const char *subject, const char *body, const char *hostname, const int port);
 
 private:
 	Email();

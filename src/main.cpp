@@ -1,16 +1,20 @@
 #include <iostream>
+#include <vector>
 #include "email.h"
 
 int main() {
 	Email *email = Email::Instance();
+	std::vector<std::string> recipients;
+	recipients.push_back("pepe@mailinator.com");
+	recipients.push_back("pepa@mailinator.com");
 	
 	int ret = email->sendmail(
-        "from@from-host.org",		/* from     */
-        "direccion@servidor.com",	/* to       */
-        "Subject",					/* subject  */
-        "body",						/* body     */
-        "localhost",				/* hostname */
-        25							/* port     */
+        "hola@hotmail.com",                              /* from     */
+        recipients,                                      /* to       */
+        "Mail subject",                                  /* subject  */
+        "Mail body.\n\nCan contain linebreaks.\n\nBye.", /* body     */
+        "localhost",                                     /* hostname */
+        25                                               /* port     */
     );
 
     if (ret != 0)

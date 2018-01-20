@@ -5,6 +5,7 @@
 #include <sys/socket.h>
 #include <string.h>
 #include <stdio.h>
+#include <unistd.h>
 
 using namespace std;
 
@@ -39,7 +40,7 @@ void Email::writeSocket(const int sock, const char *str, const char *arg) {
 	send(sock, buf, strlen(buf), 0);
 }
 
-int Email::sendmail(const char *from, const char *to, const char *subject, const char *body, const char *hostname, const int port) {
+int Email::sendmail(const char *from, std::vector<std::string> recipients, const char *subject, const char *body, const char *hostname, const int port) {
 	struct hostent *host;
 	struct sockaddr_in saddr_in;
 	int sock = 0;
@@ -64,8 +65,13 @@ int Email::sendmail(const char *from, const char *to, const char *subject, const
 	writeSocket(sock, "MAIL FROM: %s\n", from);    // from
 	recv(sock, buf, 254, 0);
 	printf("\nRec: %s", buf);
-	writeSocket(sock, "RCPT TO: %s\n",   to);      // to
-	recv(sock, buf, 254, 0);
+	
+	for(int i = 0; i < (int)recipients.size(); i++){
+		writeSocket(sock, "RCPT TO: %s\n",   recipients.at(i).c_str()); // to
+		//printf("RCPT TO: %s\n", recipients.at(i).c_str());
+		recv(sock, buf, 254, 0);
+	}
+	
 	printf("\nRec: %s", buf);
 	writeSocket(sock, "DATA\n",          NULL);    // begin data
 	recv(sock, buf, 254, 0);
@@ -73,7 +79,12 @@ int Email::sendmail(const char *from, const char *to, const char *subject, const
 
 	// next comes mail headers
 	writeSocket(sock, "From: %s\n",      from);
-	writeSocket(sock, "To: %s\n",        to);
+	
+	for(int i = 0; i < (int)recipients.size(); i++){
+		writeSocket(sock, "To: %s\n",   recipients.at(i).c_str()); // to
+		//printf("To: %s\n", recipients.at(i).c_str());
+	}
+	
 	writeSocket(sock, "Subject: %s\n",   subject);
 
 	writeSocket(sock, "\n",              NULL);
