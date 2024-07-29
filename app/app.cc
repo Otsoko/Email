@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "email.h"
+#include <email.hh>
 
 int main() {
 	Email *email = Email::Instance();

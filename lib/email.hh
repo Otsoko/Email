@@ -1,5 +1,4 @@
-#ifndef EMAIL_H
-#define EMAIL_H
+#pragma once
 
 #include <iostream>
 #include <vector>
@@ -18,5 +17,3 @@ private:
 	virtual ~Email();
 	void writeSocket(const int sock, const char *str, const char *arg);
 };
-
-#endif // EMAIL_H
